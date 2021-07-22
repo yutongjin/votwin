@@ -30,15 +30,41 @@
     }
   ],
   "Elections": [
-    {
-      "electionID": 1,
-      "count": 3,
-      "electionTitle": "Should bill1 be passed?"
-    },
-    {
-      "electionID": 2,
-      "count": 4,
-      "electionTitle": "Should bill1 be passed?"
-    }
+      {
+        "id": 1,
+        "electionTitle": "Voting for bills",
+        "questions": [
+          {
+            "id": 1,
+            "questionTitle": "Should bill1 be passed?",
+            "totalYes": 4,
+            "totalNo": 1
+          },
+          {
+            "id": 2,
+            "questionTitle": "Should bill2 be passed?",
+            "totalYes": 4,
+            "totalNo": 1
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "electionTitle": "Voting for bills again",
+        "questions": [
+          {
+            "id": 3,
+            "questionTitle": "Should bill3 be passed?",
+            "totalYes": 2,
+            "totalNo": 1
+          },
+          {
+            "id": 4,
+            "questionTitle": "Should bill4 be passed?",
+            "totalYes": 1,
+            "totalNo": 2
+          }
+        ]
+      }
   ]
 }
