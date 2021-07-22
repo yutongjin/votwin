@@ -81,14 +81,16 @@
   "Elections": [
       {
         "id": 1,
-        "totalVoted": 5,
+        "electionTitle": "Voting for bills",
         "questions": [
           {
+            "questionID": 1,
             "questionTitle": "Should bill1 be passed?",
             "totalYes": 4,
             "totalNo": 1
           },
           {
+            "questionID": 2,
             "questionTitle": "Should bill2 be passed?",
             "totalYes": 4,
             "totalNo": 1
@@ -100,11 +102,13 @@
         "totalVoted": 3,
         "questions": [
           {
+            "questionID": 3,
             "questionTitle": "Should bill3 be passed?",
             "totalYes": 2,
             "totalNo": 1
           },
           {
+            "questionID": 4,
             "questionTitle": "Should bill4 be passed?",
             "totalYes": 1,
             "totalNo": 2
