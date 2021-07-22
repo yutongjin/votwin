@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
 
 import './App.css';
 import UserTool from './components/UserTool';
+import VotesTools from './components/VotesTools'
 
 function App() {
 
@@ -18,7 +19,7 @@ function App() {
         <Route path="/home"><div></div></Route>
         <Route path="/userTools"><UserTool /></Route>
         <Route path="/register"><div>register</div></Route>
-        <Route path="/vote"><div>vote</div></Route>
+        <Route path="/vote"><VotesTools /></Route>
         <Route path="/election"><div>election</div></Route>
       </Switch>
     </Router>
