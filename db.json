@@ -25,7 +25,8 @@
       "city": "London",
       "birthday": "1934/04/03",
       "email": "yutongjin@gmail.com",
-      "phone": "6692437654"
+      "phone": "6692437654",
+      "checked": true
     },
     {
       "id": 1,
@@ -35,7 +36,8 @@
       "city": "London",
       "birthday": "1968/06/03",
       "email": "superhero@gmail.com",
-      "phone": "3739859037"
+      "phone": "3739859037",
+      "checked": false
     },
     {
       "id": 2,
@@ -45,7 +47,8 @@
       "city": "London",
       "birthday": "2001/04/03",
       "email": "bestGaren@gmail.com",
-      "phone": "195074646"
+      "phone": "195074646",
+      "checked": false
     },
     {
       "id": 3,
@@ -55,7 +58,8 @@
       "city": "London",
       "birthday": "1934/04/03",
       "email": "yutongjin@gmail.com",
-      "phone": "6692437654"
+      "phone": "6692437654",
+      "checked": false
     },
     {
       "id": 4,
@@ -65,7 +69,8 @@
       "city": "London",
       "birthday": "1934/04/03",
       "email": "startstart@gmail.com",
-      "phone": "33423423523"
+      "phone": "33423423523",
+      "checked": false
     },
     {
       "id": 5,
@@ -75,7 +80,8 @@
       "city": "London",
       "birthday": "1967/04/03",
       "email": "Luobote@gmail.com",
-      "phone": "9485658345"
+      "phone": "9485658345",
+      "checked": false
     }
   ],
   "Elections": [
