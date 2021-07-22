@@ -5,7 +5,7 @@ import UserTool from "./components/UserTool";
 
 ReactDOM.render(
   <React.StrictMode>
-    <UserTool />
+    <App />
   </React.StrictMode>,
   document.getElementById("root")
 );
