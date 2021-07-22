@@ -1,12 +1,24 @@
 import { useState, useMemo } from "react";
+import "./styles.css";
 
 import UserRow from "./UserRow.js";
 import UserEditRow from "./UserEditRow.js";
 
-function UserTable({ userList, onSaveHandler: onSave, onDeleteHandler,onCheckedHandler, onTriggerDeleteSelected }) {
+function UserTable({
+  userList,
+  onSaveHandler: onSave,
+  onDeleteHandler,
+  onCheckedHandler,
+  onTriggerDeleteSelected,
+}) {
   //userList.sort((a, b) => (a.id > b.id) ? 1 : -1);
   const { items, requestSort, sortConfig } = useSortableData(userList);
-
+  const getClassNamesFor = (name) => {
+    if (!sortConfig) {
+      return;
+    }
+    return sortConfig.key === name ? sortConfig.direction : undefined;
+  };
   let [editId, setEditId] = useState(-1);
   const [sortedField, setSortedField] = useState(null);
 
@@ -30,37 +42,65 @@ function UserTable({ userList, onSaveHandler: onSave, onDeleteHandler,onCheckedH
         <tr key="header">
           <th>id</th>
           <th>
-            <button type="button" onClick={() => requestSort("firstName")}>
+            <button
+              type="button"
+              onClick={() => requestSort("firstName")}
+              className={getClassNamesFor("firstName")}
+            >
               firstName
             </button>
           </th>
           <th>
-            <button type="button" onClick={() => requestSort("lastName")}>
+            <button
+              type="button"
+              onClick={() => requestSort("lastName")}
+              className={getClassNamesFor("lastName")}
+            >
               lastName
             </button>
           </th>
           <th>
-            <button type="button" onClick={() => requestSort("address")}>
+            <button
+              type="button"
+              onClick={() => requestSort("address")}
+              className={getClassNamesFor("address")}
+            >
               address
             </button>
           </th>
           <th>
-            <button type="button" onClick={() => requestSort("city")}>
+            <button
+              type="button"
+              onClick={() => requestSort("city")}
+              className={getClassNamesFor("city")}
+            >
               city
             </button>
           </th>
           <th>
-            <button type="button" onClick={() => requestSort("firstName")}>
+            <button
+              type="button"
+              onClick={() => requestSort("birthday")}
+              className={getClassNamesFor("birthday")}
+            >
               firstName
             </button>
           </th>
           <th>
-            <button type="button" onClick={() => requestSort("email")}>
+            <button
+              type="button"
+              onClick={() => requestSort("email")}
+              className={getClassNamesFor("email")}
+            >
               email
             </button>
           </th>
           <th>
-            <button type="button" onClick={() => requestSort("phone")}>
+            <button
+              type="button"
+              onClick={() => requestSort("phone")}
+              className={getClassNamesFor("phone")}
+            >
               phone
             </button>
           </th>
@@ -68,24 +108,26 @@ function UserTable({ userList, onSaveHandler: onSave, onDeleteHandler,onCheckedH
       </thead>
       <tbody>
         <div>
-        {items.map((user) => {
-          return editId != user.id ? (
-            <UserRow
-              user={user}
-              onEditHandler={onEditHandler}
-              onDeleteHandler={onDeleteHandler}
-              onCheckedHandler={onCheckedHandler}
-            />
-          ) : (
-            <UserEditRow
-              user={user}
-              onSaveHandler={onSaveHandler}
-              onCancelHandler={onCancelHandler}
-            />
-          );
-        })}
-            <button onClick={onTriggerDeleteSelected}>delete selected users</button>
-            </div> 
+          {items.map((user) => {
+            return editId != user.id ? (
+              <UserRow
+                user={user}
+                onEditHandler={onEditHandler}
+                onDeleteHandler={onDeleteHandler}
+                onCheckedHandler={onCheckedHandler}
+              />
+            ) : (
+              <UserEditRow
+                user={user}
+                onSaveHandler={onSaveHandler}
+                onCancelHandler={onCancelHandler}
+              />
+            );
+          })}
+          <button onClick={onTriggerDeleteSelected}>
+            delete selected users
+          </button>
+        </div>
       </tbody>
     </table>
   );
