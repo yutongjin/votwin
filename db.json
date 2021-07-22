@@ -18,69 +18,14 @@
   },
   "users": [
     {
-      "id": 0,
+      "id": 4,
       "firstName": "Yutong",
       "lastName": "Jin",
-      "address": "1025 Votwin Street, moonCity",
-      "city": "London",
-      "birthday": "1934/04/03",
-      "email": "yutongjin@gmail.com",
-      "phone": "6692437654",
-      "checked": true
-    },
-    {
-      "id": 1,
-      "firstName": "Hu Teng",
-      "lastName": "Won",
-      "address": "1047 Votwin Street, moonCity",
-      "city": "London",
-      "birthday": "1968/06/03",
-      "email": "superhero@gmail.com",
-      "phone": "3739859037",
-      "checked": false
-    },
-    {
-      "id": 2,
-      "firstName": "Peter ",
-      "lastName": "Cooper",
-      "address": "2080 Votwin Street, moonCity",
-      "city": "London",
-      "birthday": "2001/04/03",
-      "email": "bestGaren@gmail.com",
-      "phone": "195074646",
-      "checked": false
-    },
-    {
-      "id": 3,
-      "firstName": "Yutong",
-      "lastName": "Jinfddsf",
-      "address": "1025 Votwin Street, moonCity",
-      "city": "London",
-      "birthday": "1934/04/03",
-      "email": "yutongjin@gmail.com",
-      "phone": "6692437654",
-      "checked": false
-    },
-    {
-      "id": 4,
-      "firstName": "xinghui",
-      "lastName": "Zhu",
-      "address": "8694 Votwin Street, moonCity",
-      "city": "London",
-      "birthday": "1934/04/03",
-      "email": "startstart@gmail.com",
-      "phone": "33423423523",
-      "checked": false
-    },
-    {
-      "id": 5,
-      "firstName": "Robert",
-      "lastName": "Jason",
-      "address": "4083 Votwin Street, moonCity",
-      "city": "London",
-      "birthday": "1967/04/03",
-      "email": "Luobote@gmail.com",
-      "phone": "9485658345",
+      "address": "1138 Le Mans Terrace",
+      "city": "Sunnyvale",
+      "birthday": "",
+      "email": "yutong_jin@intuit.com",
+      "phone": "6692257436",
       "checked": false
     }
   ],

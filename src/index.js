@@ -2,7 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import reportWebVitals from "./reportWebVitals";
 import UserTool from "./components/UserTool";
-
+import UserForm from "./components/UserForm";
+import App from "./App";
 ReactDOM.render(
   <React.StrictMode>
     <App />

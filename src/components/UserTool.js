@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import UserTable from "./UserTable.js";
+import UserForm from "./UserForm.js";
+import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
+
 function UserTool(props) {
   let [userList, setUserList] = useState([]);
   const SERVER_URL = "http://localhost:3005/users";
 
-  let [triggerDeleteSelect, setTriggerDeleteSelect] = useState(false);
+  let [isLogin, setIsLogin] = useState(false);
   function checkHttpStatus(response) {
     if (response.ok) {
       return Promise.resolve(response);
@@ -112,13 +115,27 @@ function UserTool(props) {
 
   return (
     <div>
-      <UserTable
+         <Router>
+      <nav><ul>
+        <li><Link to="/userList">UserList</Link></li>
+        <li><Link to="/register">Register Voters</Link></li>
+
+      </ul></nav>
+      <Switch>
+        <Route path="/userList"><UserTable
         userList={userList}
         onSaveHandler={onUserSave}
         onDeleteHandler={onUserDelete}
         onCheckedHandler={onCheckedHandler}
         onTriggerDeleteSelected={onUserDeleteSelect}
-      />
+      /></Route>
+        <Route path="/register"><UserForm onAddHandler={onUserAdd} /></Route>
+      
+      </Switch>
+    </Router>
+    
+      
+      
     </div>
   );
 }
