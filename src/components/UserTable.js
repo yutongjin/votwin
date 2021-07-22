@@ -13,6 +13,7 @@ function UserTable({
 }) {
   //userList.sort((a, b) => (a.id > b.id) ? 1 : -1);
   const { items, requestSort, sortConfig } = useSortableData(userList);
+  const [isExpanded, setIsExpanded]=useState(false);
   const getClassNamesFor = (name) => {
     if (!sortConfig) {
       return;
@@ -37,6 +38,12 @@ function UserTable({
   }
 
   return (
+      <div >
+          
+          <button onClick={() => setIsExpanded(!isExpanded)}>
+          UserList
+          </button>
+    {isExpanded? 
     <table>
       <thead>
         <tr key="header">
@@ -129,7 +136,8 @@ function UserTable({
           </button>
         </div>
       </tbody>
-    </table>
+    </table> : null}
+    </div>
   );
 }
 
