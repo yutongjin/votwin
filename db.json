@@ -99,7 +99,7 @@
       },
       {
         "id": 2,
-        "totalVoted": 3,
+        "electionTitle": "Voting for bills again",
         "questions": [
           {
             "questionID": 3,
