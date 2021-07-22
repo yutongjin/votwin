@@ -12,36 +12,6 @@ export function refresh(data) {
     data,
   };
 }
-export function addUserAction(user) {
-  return {
-    type: ADD_USER,
-    user,
-  };
-}
-export function saveUserAction(user) {
-  return {
-    type: SAVE_USER,
-    user,
-  };
-}
-export function checkUserAction(user) {
-  return {
-    type: CHECK_USER,
-    user,
-  };
-}
-export function deleteUserAction(user) {
-  return {
-    type: DELETE_USER,
-    user,
-  };
-}
-export function deleteSelectedUserAction(user) {
-  return {
-    type: DELETE_SELECTED_USER,
-    user,
-  };
-}
 
 export const sendAddUserRequest = (newUser) => (dispatch) => {
   const requestOptions = {
@@ -53,7 +23,6 @@ export const sendAddUserRequest = (newUser) => (dispatch) => {
     .then(checkHttpStatus)
     .catch((error) => console.error(error))
     .then(dispatch(refreshUser()));
-    ;
 };
 export const sendSaveUserRequest = (newUser) => (dispatch) => {
   const requestOptions = {
@@ -65,7 +34,6 @@ export const sendSaveUserRequest = (newUser) => (dispatch) => {
     .then(checkHttpStatus)
     .catch((error) => console.error(error))
     .then(dispatch(refreshUser()));
-    ;
 };
 export const sendCheckedUserRequest = (newUser) => (dispatch) => {
   const requestOptions = {
@@ -87,7 +55,6 @@ export const sendDeleteUserRequest = (newUser) => (dispatch) => {
     .then(checkHttpStatus)
     .catch((error) => console.error(error))
     .then(dispatch(refreshUser()));
-    ;
 };
 function checkHttpStatus(response) {
   if (response.ok) {
@@ -102,21 +69,20 @@ export const sendDeleteSelectedUserRequest = (users) => (dispatch) => {
   users.forEach((element) => {
     fetch(`http://localhost:3005/users/${element.id}`, { method: "DELETE" })
       .then(checkHttpStatus)
-      .catch((error) => console.error(error))
-      ;
-  });
-  dispatch(refreshUser());
+      .catch((error) => console.error(error));
+  })
+  setTimeout(dispatch(refreshUser()),400);
 };
 
-  // This is called once we've added the car. As you can see in addCar(),
-  // when the POST is done, we then can get the latest list of cars from
-  // the server.
-  export const refreshUser = () => {
-    return (dispatch) => {
-        fetch(`http://localhost:3005/users`)
-        .then(checkHttpStatus)
-        .then((res) => res.json())
-        .then((data) => dispatch(refresh(data)))
-        .catch((error) => console.error(error));
-    };
+// This is called once we've added the car. As you can see in addCar(),
+// when the POST is done, we then can get the latest list of cars from
+// the server.
+export const refreshUser = () => {
+  return (dispatch) => {
+    fetch(`http://localhost:3005/users`)
+      .then(checkHttpStatus)
+      .then((res) => res.json())
+      .then((data) => dispatch(refresh(data)))
+      .catch((error) => console.error(error));
   };
+};
