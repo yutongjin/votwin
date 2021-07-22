@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
 
 import './App.css';
 import UserTool from './components/UserTool';
+import ResultPage from './components/ResultPage';
 
 function App() {
 
@@ -19,7 +20,7 @@ function App() {
         <Route path="/userTools"><UserTool /></Route>
         <Route path="/register"><div>register</div></Route>
         <Route path="/vote"><div>vote</div></Route>
-        <Route path="/election"><div>election</div></Route>
+        <Route path="/election"><div><ResultPage /></div></Route>
       </Switch>
     </Router>
   );
