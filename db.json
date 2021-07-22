@@ -25,8 +25,7 @@
       "city": "London",
       "birthday": "1934/04/03",
       "email": "yutongjin@gmail.com",
-      "phone": "6692437654",
-      "checked": true
+      "phone": "6692437654"
     },
     {
       "id": 1,
@@ -36,8 +35,7 @@
       "city": "London",
       "birthday": "1968/06/03",
       "email": "superhero@gmail.com",
-      "phone": "3739859037",
-      "checked": false
+      "phone": "3739859037"
     },
     {
       "id": 2,
@@ -47,8 +45,7 @@
       "city": "London",
       "birthday": "2001/04/03",
       "email": "bestGaren@gmail.com",
-      "phone": "195074646",
-      "checked": false
+      "phone": "195074646"
     },
     {
       "id": 3,
@@ -58,8 +55,7 @@
       "city": "London",
       "birthday": "1934/04/03",
       "email": "yutongjin@gmail.com",
-      "phone": "6692437654",
-      "checked": false
+      "phone": "6692437654"
     },
     {
       "id": 4,
@@ -69,8 +65,7 @@
       "city": "London",
       "birthday": "1934/04/03",
       "email": "startstart@gmail.com",
-      "phone": "33423423523",
-      "checked": false
+      "phone": "33423423523"
     },
     {
       "id": 5,
@@ -80,20 +75,41 @@
       "city": "London",
       "birthday": "1967/04/03",
       "email": "Luobote@gmail.com",
-      "phone": "9485658345",
-      "checked": false
+      "phone": "9485658345"
     }
   ],
   "Elections": [
-    {
-      "electionID": 1,
-      "count": 3,
-      "electionTitle": "Should bill1 be passed?"
-    },
-    {
-      "electionID": 2,
-      "count": 4,
-      "electionTitle": "Should bill1 be passed?"
-    }
+      {
+        "id": 1,
+        "totalVoted": 5,
+        "questions": [
+          {
+            "questionTitle": "Should bill1 be passed?",
+            "totalYes": 4,
+            "totalNo": 1
+          },
+          {
+            "questionTitle": "Should bill2 be passed?",
+            "totalYes": 4,
+            "totalNo": 1
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "totalVoted": 3,
+        "questions": [
+          {
+            "questionTitle": "Should bill3 be passed?",
+            "totalYes": 2,
+            "totalNo": 1
+          },
+          {
+            "questionTitle": "Should bill4 be passed?",
+            "totalYes": 1,
+            "totalNo": 2
+          }
+        ]
+      }
   ]
 }
