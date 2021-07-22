@@ -3,7 +3,7 @@ import { useState, useMemo } from "react";
 import UserRow from "./UserRow.js";
 import UserEditRow from "./UserEditRow.js";
 
-function UserTable({ userList, onSaveHandler: onSave, onDeleteHandler }) {
+function UserTable({ userList, onSaveHandler: onSave, onDeleteHandler,onCheckedHandler, onTriggerDeleteSelected }) {
   //userList.sort((a, b) => (a.id > b.id) ? 1 : -1);
   const { items, requestSort, sortConfig } = useSortableData(userList);
 
@@ -67,12 +67,14 @@ function UserTable({ userList, onSaveHandler: onSave, onDeleteHandler }) {
         </tr>
       </thead>
       <tbody>
+        <div>
         {items.map((user) => {
           return editId != user.id ? (
             <UserRow
               user={user}
               onEditHandler={onEditHandler}
               onDeleteHandler={onDeleteHandler}
+              onCheckedHandler={onCheckedHandler}
             />
           ) : (
             <UserEditRow
@@ -82,6 +84,8 @@ function UserTable({ userList, onSaveHandler: onSave, onDeleteHandler }) {
             />
           );
         })}
+            <button onClick={onTriggerDeleteSelected}>delete selected users</button>
+            </div> 
       </tbody>
     </table>
   );

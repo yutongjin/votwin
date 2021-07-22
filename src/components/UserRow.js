@@ -1,4 +1,4 @@
-let UserRow = ({ user, onEditHandler, onDeleteHandler }) =>  {
+let UserRow = ({ user, onEditHandler, onDeleteHandler, onCheckedHandler }) =>  {
     return (
         <tr key={user.id}>
             <td>{user.id}</td>
@@ -9,6 +9,12 @@ let UserRow = ({ user, onEditHandler, onDeleteHandler }) =>  {
             <td>{user.birthday}</td>
             <td>{user.email}</td>
             <td>{user.phone}</td>
+            <td><input type="checkbox" 
+        defaultChecked={false}
+        onChange={() => {
+            onCheckedHandler(user);
+        }}/>
+            </td>
             <td>
                 <input type="button" value="Edit" onClick={() => onEditHandler(user.id)} />
                 <input type="button" value="Delete" onClick={() => onDeleteHandler(user)} />

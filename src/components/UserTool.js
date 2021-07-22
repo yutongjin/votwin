@@ -25,6 +25,30 @@ function UserTool(props) {
         []
     )
 
+    function onCheckedHandler(userObject) {
+        const newUserList = userList.map((user) => {
+            return ((
+                user.id === userObject.id)
+                ? {
+                    ...user,
+                    "checked":!user.checked
+                }
+                : user
+            )
+        });
+        const requestOptions = {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                ...userObject,
+                "checked":!userObject.checked
+            }),
+        };
+        fetch(`${SERVER_URL}/${userObject.id}`, requestOptions)
+        .then(checkHttpStatus)
+        .then(() => updateLocalModel(newUserList))
+        .catch((error) => console.error(error))
+    }
     function onUserAdd(userObject) {
         // Build out what the new model will look like should the PUT succeedes 
         const nextId = userList?.sort((a, b) => (a.id > b.id) ? -1 : 1)[0]?.id + 1;
@@ -77,6 +101,17 @@ function UserTool(props) {
             .then(() => updateLocalModel(newUserList))
             .catch((error) => console.error(error))
     }
+    function onUserDeleteSelect() {
+        const newUserList = userList.filter((user) => !user.checked);
+        const deletedList = userList.filter((user) => user.checked);
+        deletedList.forEach(element => {
+            fetch(`${SERVER_URL}/${element.id}`, { method: 'DELETE' })
+            .then(checkHttpStatus)
+            .catch((error) => console.error(error))
+        });
+        updateLocalModel(newUserList);
+       
+    }
 
     function updateLocalModel(userList) {
         setUserList(userList);
@@ -85,8 +120,8 @@ function UserTool(props) {
     return (
         <div>
 
-            <UserTable userList={userList} onSaveHandler={onUserSave} onDeleteHandler={onUserDelete} />
-            {/* <UserForm onAddHandler={onUserAdd} /> */}
+            <UserTable userList={userList} onSaveHandler={onUserSave} onDeleteHandler={onUserDelete} onCheckedHandler={onCheckedHandler} 
+            onTriggerDeleteSelected={onUserDeleteSelect} />
         </div>
     )
 }
