@@ -1,9 +1,11 @@
 import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
 
-import "./App.css";
-import UserTool from "./components/UserTool";
-import VotesTools from "./components/VotesTools";
+import './App.css';
+import UserTool from './components/UserTool';
+import VotesTools from './components/VotesTools';
+import ElectionPage from './components/ElectionPage';
 import logo from "./res/votwin_logo.png";
+
 function App() {
   return (
     <div className="container">
@@ -33,7 +35,7 @@ function App() {
             </div>
           </Route>
           <Route path="/election">
-            <div>election</div>
+            <div className="form-box"><ElectionPage /></div>
           </Route>
         </Switch>
       </Router>
