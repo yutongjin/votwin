@@ -13,7 +13,7 @@ function UserTable({
 }) {
   //userList.sort((a, b) => (a.id > b.id) ? 1 : -1);
   const { items, requestSort, sortConfig } = useSortableData(userList);
-  const [isExpanded, setIsExpanded]=useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
   const getClassNamesFor = (name) => {
     if (!sortConfig) {
       return;
@@ -38,105 +38,103 @@ function UserTable({
   }
 
   return (
-      <div >
-          
-          <button onClick={() => setIsExpanded(!isExpanded)}>
-          UserList
-          </button>
-    {isExpanded? 
-    <table>
-      <thead>
-        <tr key="header">
-          <th>id</th>
-          <th>
-            <button
-              type="button"
-              onClick={() => requestSort("firstName")}
-              className={getClassNamesFor("firstName")}
-            >
-              firstName
-            </button>
-          </th>
-          <th>
-            <button
-              type="button"
-              onClick={() => requestSort("lastName")}
-              className={getClassNamesFor("lastName")}
-            >
-              lastName
-            </button>
-          </th>
-          <th>
-            <button
-              type="button"
-              onClick={() => requestSort("address")}
-              className={getClassNamesFor("address")}
-            >
-              address
-            </button>
-          </th>
-          <th>
-            <button
-              type="button"
-              onClick={() => requestSort("city")}
-              className={getClassNamesFor("city")}
-            >
-              city
-            </button>
-          </th>
-          <th>
-            <button
-              type="button"
-              onClick={() => requestSort("birthday")}
-              className={getClassNamesFor("birthday")}
-            >
-              firstName
-            </button>
-          </th>
-          <th>
-            <button
-              type="button"
-              onClick={() => requestSort("email")}
-              className={getClassNamesFor("email")}
-            >
-              email
-            </button>
-          </th>
-          <th>
-            <button
-              type="button"
-              onClick={() => requestSort("phone")}
-              className={getClassNamesFor("phone")}
-            >
-              phone
-            </button>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <div>
-          {items.map((user) => {
-            return editId != user.id ? (
-              <UserRow
-                user={user}
-                onEditHandler={onEditHandler}
-                onDeleteHandler={onDeleteHandler}
-                onCheckedHandler={onCheckedHandler}
-              />
-            ) : (
-              <UserEditRow
-                user={user}
-                onSaveHandler={onSaveHandler}
-                onCancelHandler={onCancelHandler}
-              />
-            );
-          })}
-          <button onClick={onTriggerDeleteSelected}>
-            delete selected users
-          </button>
-        </div>
-      </tbody>
-    </table> : null}
+    <div>
+      <button onClick={() => setIsExpanded(!isExpanded)}>UserList</button>
+      {isExpanded ? (
+        <table>
+          <thead>
+            <tr key="header">
+              <th>id</th>
+              <th>
+                <button
+                  type="button"
+                  onClick={() => requestSort("firstName")}
+                  className={getClassNamesFor("firstName")}
+                >
+                  firstName
+                </button>
+              </th>
+              <th>
+                <button
+                  type="button"
+                  onClick={() => requestSort("lastName")}
+                  className={getClassNamesFor("lastName")}
+                >
+                  lastName
+                </button>
+              </th>
+              <th>
+                <button
+                  type="button"
+                  onClick={() => requestSort("address")}
+                  className={getClassNamesFor("address")}
+                >
+                  address
+                </button>
+              </th>
+              <th>
+                <button
+                  type="button"
+                  onClick={() => requestSort("city")}
+                  className={getClassNamesFor("city")}
+                >
+                  city
+                </button>
+              </th>
+              <th>
+                <button
+                  type="button"
+                  onClick={() => requestSort("birthday")}
+                  className={getClassNamesFor("birthday")}
+                >
+                  firstName
+                </button>
+              </th>
+              <th>
+                <button
+                  type="button"
+                  onClick={() => requestSort("email")}
+                  className={getClassNamesFor("email")}
+                >
+                  email
+                </button>
+              </th>
+              <th>
+                <button
+                  type="button"
+                  onClick={() => requestSort("phone")}
+                  className={getClassNamesFor("phone")}
+                >
+                  phone
+                </button>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <div>
+              {items.map((user) => {
+                return editId != user.id ? (
+                  <UserRow
+                    user={user}
+                    onEditHandler={onEditHandler}
+                    onDeleteHandler={onDeleteHandler}
+                    onCheckedHandler={onCheckedHandler}
+                  />
+                ) : (
+                  <UserEditRow
+                    user={user}
+                    onSaveHandler={onSaveHandler}
+                    onCancelHandler={onCancelHandler}
+                  />
+                );
+              })}
+              <button onClick={onTriggerDeleteSelected}>
+                delete selected users
+              </button>
+            </div>
+          </tbody>
+        </table>
+      ) : null}
     </div>
   );
 }

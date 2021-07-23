@@ -12,7 +12,7 @@ let UserRow = ({ user, onEditHandler, onDeleteHandler, onCheckedHandler }) => {
       <td>
         <input
           type="checkbox"
-          defaultChecked={false}
+          defaultChecked={user.checked}
           onChange={() => {
             onCheckedHandler(user);
           }}
