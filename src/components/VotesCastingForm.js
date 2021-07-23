@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { refreshQuestionsTable, updateElection } from '../actions/votesActions.js'
 
 
-function VotesCastingForm({ electionId, handleCastVoteClicked }) {
+function VotesCastingForm({ electionId, user, handleCastVoteClicked }) {
     const dispatch = useDispatch();
     const election = useSelector((state) => state.election);
 
@@ -37,7 +37,7 @@ function VotesCastingForm({ electionId, handleCastVoteClicked }) {
         });
 
         let newElection = {...election, questions:[...newQuestions]};
-        dispatch(updateElection(newElection, handleCastVoteClicked));
+        dispatch(updateElection(newElection, user, handleCastVoteClicked));
     }
 
     return (
@@ -46,9 +46,9 @@ function VotesCastingForm({ electionId, handleCastVoteClicked }) {
             {
                 election.questions.map((question) => {
                     return (
-                        <div>
+                        <div key={question.id}>
                             <input type="checkbox" id={question.id} name={question.id} onChange={handleCheckbox} /> &nbsp; 
-                            <label for={question.id}>{question.questionTitle}</label>
+                            <label>{question.questionTitle}</label>
                         </div>
                     )
                 })

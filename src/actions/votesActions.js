@@ -1,7 +1,9 @@
 export const REFRESH_VOTES_LIST = "REFRESH_VOTES_LIST";
 export const REFRESH_QUESTIONS_LIST = "REFRESH_QUESTIONS_LIST";
 
-const SERVER_URL = "http://localhost:3005/Elections";
+const SERVER_URL = "http://localhost:3005";
+const ELECTION_PATH = 'Elections';
+const USERS_PATH = 'users';
 
 function checkHttpStatus(response) {
     if (response.ok) {
@@ -15,7 +17,7 @@ function checkHttpStatus(response) {
 
 export const refreshVotesTable = () => {
     return (dispatch) => {
-        fetch(`${SERVER_URL}`)
+        fetch(`${SERVER_URL}/${ELECTION_PATH}`)
             .then(checkHttpStatus)
             .then((res) => res.json())
             .then((data) => dispatch(refresh(REFRESH_VOTES_LIST, data)))
@@ -25,7 +27,7 @@ export const refreshVotesTable = () => {
 
 export const refreshQuestionsTable = (electionId) => {
     return (dispatch) => {
-        fetch(`${SERVER_URL}/${electionId}`)
+        fetch(`${SERVER_URL}/${ELECTION_PATH}/${electionId}`)
             .then(checkHttpStatus)
             .then((res) => res.json())
             .then((data) => dispatch(refresh(REFRESH_QUESTIONS_LIST, data)))
@@ -33,7 +35,7 @@ export const refreshQuestionsTable = (electionId) => {
     };
 };
 
-export const updateElection = (election, handleCastVoteClicked) => {
+export const updateElection = (election, user, handleCastVoteClicked) => {
     const requestOptions = {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -41,7 +43,27 @@ export const updateElection = (election, handleCastVoteClicked) => {
     };
 
     return (dispatch) => {
-        fetch(`${SERVER_URL}/${election.id}`, requestOptions)
+        fetch(`${SERVER_URL}/${ELECTION_PATH}/${election.id}`, requestOptions)
+            .then(checkHttpStatus)
+            .then(dispatch(updateUserVotesList(user, election.id, handleCastVoteClicked)))
+            .catch((error) => console.error(error))
+    };
+}
+
+export const updateUserVotesList = (user, electionId, handleCastVoteClicked) => {
+    let updatedUser = {
+        ...user,
+        voted: [...user.voted, electionId]
+    }
+
+    const requestOptions = {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updatedUser),
+    };
+
+    return (dispatch) => {
+        fetch(`${SERVER_URL}/${USERS_PATH}/${user.id}`, requestOptions)
             .then(checkHttpStatus)
             .then(dispatch(handleCastVoteClicked))
             .catch((error) => console.error(error))

@@ -26,45 +26,63 @@
       "birthday": "",
       "email": "yutong_jin@intuit.com",
       "phone": "6692257436",
-      "checked": false
+      "checked": false,
+      "voted": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": 5,
+      "firstName": "Ricky",
+      "lastName": "H",
+      "address": "123 somewhere",
+      "city": "San Diego",
+      "birthday": "",
+      "email": "ricky_huang@intuit.com",
+      "phone": "5555555555",
+      "checked": false,
+      "voted": [
+        10
+      ]
     }
   ],
   "Elections": [
-      {
-        "id": 1,
-        "electionTitle": "Voting for bills",
-        "questions": [
-          {
-            "id": 1,
-            "questionTitle": "Should bill1 be passed?",
-            "totalYes": 4,
-            "totalNo": 1
-          },
-          {
-            "id": 2,
-            "questionTitle": "Should bill2 be passed?",
-            "totalYes": 4,
-            "totalNo": 1
-          }
-        ]
-      },
-      {
-        "id": 2,
-        "electionTitle": "Voting for bills again",
-        "questions": [
-          {
-            "id": 3,
-            "questionTitle": "Should bill3 be passed?",
-            "totalYes": 2,
-            "totalNo": 1
-          },
-          {
-            "id": 4,
-            "questionTitle": "Should bill4 be passed?",
-            "totalYes": 1,
-            "totalNo": 2
-          }
-        ]
-      }
+    {
+      "id": 1,
+      "electionTitle": "Voting for bills",
+      "questions": [
+        {
+          "id": 1,
+          "questionTitle": "Should bill1 be passed?",
+          "totalYes": 6,
+          "totalNo": 3
+        },
+        {
+          "id": 2,
+          "questionTitle": "Should bill2 be passed?",
+          "totalYes": 7,
+          "totalNo": 2
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "electionTitle": "Voting for bills again",
+      "questions": [
+        {
+          "id": 3,
+          "questionTitle": "Should bill3 be passed?",
+          "totalYes": 5,
+          "totalNo": 3
+        },
+        {
+          "id": 4,
+          "questionTitle": "Should bill4 be passed?",
+          "totalYes": 4,
+          "totalNo": 4
+        }
+      ]
+    }
   ]
 }
