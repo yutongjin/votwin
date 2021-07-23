@@ -35,7 +35,7 @@ function App() {
             </div>
           </Route>
           <Route path="/election">
-            <div className="form-box">ElectionPage</div>
+            <div className="form-box"><ElectionPage /></div>
           </Route>
         </Switch>
       </Router>
