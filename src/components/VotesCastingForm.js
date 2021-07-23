@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 
 import { refreshQuestionsTable, updateElection } from '../actions/votesActions.js'
+import Button from "@material-ui/core/Button";
 
 
 function VotesCastingForm({ electionId, user, handleCastVoteClicked }) {
@@ -27,16 +28,16 @@ function VotesCastingForm({ electionId, user, handleCastVoteClicked }) {
     function handleClick() {
         let newQuestions = [];
         election.questions.map((question) => {
-            let newQuestion = {...question}
+            let newQuestion = { ...question }
 
             checkedList.includes(question.id)
-            ? newQuestion.totalYes += 1
-            : newQuestion.totalNo += 1
+                ? newQuestion.totalYes += 1
+                : newQuestion.totalNo += 1
 
             newQuestions.push(newQuestion);
         });
 
-        let newElection = {...election, questions:[...newQuestions]};
+        let newElection = { ...election, questions: [...newQuestions] };
         dispatch(updateElection(newElection, user, handleCastVoteClicked));
     }
 
@@ -47,14 +48,21 @@ function VotesCastingForm({ electionId, user, handleCastVoteClicked }) {
                 election.questions.map((question) => {
                     return (
                         <div key={question.id}>
-                            <input type="checkbox" id={question.id} name={question.id} onChange={handleCheckbox} /> &nbsp; 
+                            <input type="checkbox" id={question.id} name={question.id} onChange={handleCheckbox} /> &nbsp;
                             <label>{question.questionTitle}</label>
                         </div>
                     )
                 })
             }
             <p>
-                <input type="button" value="Cast Vote" onClick={handleClick} />
+                <Button
+                    variant="contained"
+                    color="blue"
+                    component="span"
+                    onClick={handleClick}
+                >
+                    Cast Vote
+        </Button>
             </p>
         </form>
     )

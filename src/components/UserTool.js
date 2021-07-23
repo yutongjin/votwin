@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import UserTable from "./UserTable.js";
 import UserForm from "./UserForm.js";
+import "./styles.css";
 import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {

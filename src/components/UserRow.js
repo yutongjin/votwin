@@ -1,3 +1,6 @@
+import "./styles.css";
+import Button from "@material-ui/core/Button";
+
 let UserRow = ({ user, onEditHandler, onDeleteHandler, onCheckedHandler }) => {
   return (
     <tr key={user.id}>
@@ -19,16 +22,23 @@ let UserRow = ({ user, onEditHandler, onDeleteHandler, onCheckedHandler }) => {
         />
       </td>
       <td>
-        <input
+        <Button
+          variant="contained"
+          color="blue"
           type="button"
-          value="Edit"
+          style={{marginRight:10}}
           onClick={() => onEditHandler(user.id)}
-        />
-        <input
+        >
+          Edit
+        </Button>
+        <Button
+          variant="contained"
+          color="blue"
           type="button"
-          value="Delete"
           onClick={() => onDeleteHandler(user)}
-        />
+        >
+          Delete
+        </Button>
       </td>
     </tr>
   );
