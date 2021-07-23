@@ -1,5 +1,4 @@
 function ResultInfo({ questions }) {
-    console.log(questions);
     return (
         <div> 
             {questions.map((question) => 
