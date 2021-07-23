@@ -21,6 +21,7 @@ function UserTool(props) {
   const SERVER_URL = "http://localhost:3005/users";
   const dispatch = useDispatch();
   const users = useSelector((state) => state.users);
+  const isFetching = useSelector((state) => state.isFetching);
 
   let [isLogin, setIsLogin] = useState(false);
   function checkHttpStatus(response) {
@@ -72,13 +73,17 @@ function UserTool(props) {
         </nav>
         <Switch>
           <Route path="/userList">
-            <UserTable
-              userList={users}
-              onSaveHandler={onUserSave}
-              onDeleteHandler={onUserDelete}
-              onCheckedHandler={onCheckedHandler}
-              onTriggerDeleteSelected={onUserDeleteSelect}
-            />
+            {isFetching ? (
+              <h2>Loading...</h2>
+            ) : (
+              <UserTable
+                userList={users}
+                onSaveHandler={onUserSave}
+                onDeleteHandler={onUserDelete}
+                onCheckedHandler={onCheckedHandler}
+                onTriggerDeleteSelected={onUserDeleteSelect}
+              />
+            )}
           </Route>
           <Route path="/register">
             <UserForm onAddHandler={onUserAdd} />
