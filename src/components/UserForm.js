@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "../App.css";
-import Button from '@material-ui/core/Button';
+import Button from "@material-ui/core/Button";
 
 function UserForm({ onAddHandler }) {
   const [isRegistered, setIsRegistered] = useState(false);
@@ -84,7 +84,14 @@ function UserForm({ onAddHandler }) {
         value={userForm.phone}
         onChange={onChange}
       />{" "}
-      <Button variant="contained" color= "blue" component="span"  onClick={onFormSubmit} >Register</Button>
+      <Button
+        variant="contained"
+        color="blue"
+        component="span"
+        onClick={onFormSubmit}
+      >
+        Register
+      </Button>
     </form>
   ) : (
     <div></div>

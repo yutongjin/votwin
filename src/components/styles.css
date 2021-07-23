@@ -1,60 +1,56 @@
 body {
-    font-family: 'open sans', sans-serif;
-    font-size: 16px;
-    padding-bottom: 2em;
+  font-family: "open sans", sans-serif;
+  font-size: 16px;
+  padding-bottom: 2em;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2em;
+}
 
-  }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 2em;
+thead th {
+  text-align: left;
+  border-bottom: 2px solid black;
+  padding-bottom: 0.1em;
+}
 
-  }
-  
-  thead th {
-    text-align: left;
-    border-bottom: 2px solid black;
-    padding-bottom: 0.1em;
+thead button {
+  border: 0;
+  border-radius: none;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: inherit;
+  padding: 0.5em;
+  margin-bottom: 1px;
+  margin-left: 1px;
+}
 
-  }
-  
-  thead button {
-    border: 0;
-    border-radius: none;
-    font-family: inherit;
-    font-weight: 700;
-    font-size: inherit;
-    padding: 0.5em;
-    margin-bottom: 1px;
-    margin-left: 1px;
+thead button.ascending::after {
+  content: "👇";
+  display: inline-block;
+  margin-left: 0.5em;
+}
 
-  }
-  
-  thead button.ascending::after {
-    content: '👇';
-    display: inline-block;
-    margin-left: 0.5em;
-  }
-  
-  thead button.descending::after {
-    content: '☝️';
-    display: inline-block;
-    margin-left: 0.5em;
-  }
-  
-  tbody td {
-    padding: 0.5em;
-    border-bottom: 1px solid #ccc;
-  }
-  
-  tbody tr:hover {
-    background-color: #eee;
-  }
-  .center {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 10%;
-    height: auto;
-    border-radius: 50%;
-  }
+thead button.descending::after {
+  content: "☝️";
+  display: inline-block;
+  margin-left: 0.5em;
+}
+
+tbody td {
+  padding: 0.5em;
+  border-bottom: 1px solid #ccc;
+}
+
+tbody tr:hover {
+  background-color: #eee;
+}
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 10%;
+  height: auto;
+  border-radius: 50%;
+}

@@ -27,7 +27,9 @@ function App() {
             <UserTool />
           </Route>
           <Route path="/vote">
+            <div className="form-box">
             <VotesTools />
+            </div>
           </Route>
           <Route path="/election">
             <div>election</div>

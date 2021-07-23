@@ -48,7 +48,7 @@ nav a {
   padding-top: 7vw;
   padding-left: 39vw;
   background-color: beige;
-
+  font-size: 30px;
   /* position:relative for .prevBtn and .nextBtn position:absolute; */
   position: relative;
 }

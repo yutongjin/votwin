@@ -1,6 +1,7 @@
 import { check } from 'prettier';
 import { useEffect, useState } from 'react';
 import VotesCastingTable from './VotesCastingTable';
+import Button from "@material-ui/core/Button";
 
 const emptyElection = {
     "id": 0,
@@ -80,7 +81,14 @@ function VotesCastingForm({ electionId, userId, handleCastVoteClicked }) {
                 })
             }
             <p>
-                <input type="button" value="Cast Vote" onClick={handleClick} />
+            <Button
+          variant="contained"
+          color="blue"
+          component="span"
+          onClick={handleClick}
+        >
+          Cast Vote
+        </Button>
             </p>
         </form>
     )
