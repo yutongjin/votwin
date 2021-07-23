@@ -1,7 +1,8 @@
 import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
 
-import "./App.css";
-import UserTool from "./components/UserTool";
+import './App.css';
+import UserTool from './components/UserTool';
+import VotesTools from './components/VotesTools'
 
 function App() {
   return (
@@ -24,7 +25,7 @@ function App() {
           <UserTool />
         </Route>
         <Route path="/vote">
-          <div>vote</div>
+          <VotesTools />
         </Route>
         <Route path="/election">
           <div>election</div>
