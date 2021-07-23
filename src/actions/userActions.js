@@ -3,6 +3,8 @@ export const SAVE_USER = "SAVE_USER";
 export const CHECK_USER = "CHECK_USER";
 export const DELETE_USER = "DELETE_USER";
 export const DELETE_SELECTED_USER = "DELETE_SELECTED_USER";
+export const REQUEST_FETCHING = "REQUEST_FETCHING";
+export const DONE_WITH_REQUEST = "DONE_WITH_REQUEST";
 
 export const REFRESH = "REFRESH";
 
@@ -12,8 +14,19 @@ export function refresh(data) {
     data,
   };
 }
+export function createRequest() {
+  return {
+    type: REQUEST_FETCHING,
+  };
+}
+export function doneWithRequest() {
+  return {
+    type: DONE_WITH_REQUEST,
+  };
+}
 
 export const sendAddUserRequest = (newUser) => (dispatch) => {
+  dispatch(createRequest());
   const requestOptions = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -22,17 +35,23 @@ export const sendAddUserRequest = (newUser) => (dispatch) => {
   fetch("http://localhost:3005/users", requestOptions)
     .then(checkHttpStatus)
     .catch((error) => console.error(error))
+    .then(dispatch(doneWithRequest()))
     .then(dispatch(refreshUser()));
 };
+
 export const sendSaveUserRequest = (newUser) => (dispatch) => {
   const requestOptions = {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(newUser),
   };
+  dispatch(createRequest());
+
   fetch(`http://localhost:3005/users/${newUser.id}`, requestOptions)
     .then(checkHttpStatus)
     .catch((error) => console.error(error))
+    .then(dispatch(doneWithRequest()))
+
     .then(dispatch(refreshUser()));
 };
 export const sendCheckedUserRequest = (newUser) => (dispatch) => {
@@ -44,16 +63,23 @@ export const sendCheckedUserRequest = (newUser) => (dispatch) => {
       checked: !newUser.checked,
     }),
   };
+  dispatch(createRequest());
+
   fetch(`http://localhost:3005/users/${newUser.id}`, requestOptions)
     .then(checkHttpStatus)
     .catch((error) => console.error(error))
+    .then(dispatch(doneWithRequest()))
+
     .then(dispatch(refreshUser()));
 };
 
 export const sendDeleteUserRequest = (newUser) => (dispatch) => {
+  dispatch(createRequest());
+
   fetch(`http://localhost:3005/users/${newUser.id}`, { method: "DELETE" })
     .then(checkHttpStatus)
     .catch((error) => console.error(error))
+    .then(dispatch(doneWithRequest()))
     .then(dispatch(refreshUser()));
 };
 function checkHttpStatus(response) {
@@ -67,11 +93,14 @@ function checkHttpStatus(response) {
 }
 export const sendDeleteSelectedUserRequest = (users) => (dispatch) => {
   users.forEach((element) => {
+    dispatch(createRequest());
+
     fetch(`http://localhost:3005/users/${element.id}`, { method: "DELETE" })
       .then(checkHttpStatus)
-      .catch((error) => console.error(error));
-  })
-  setTimeout(dispatch(refreshUser()),400);
+      .catch((error) => console.error(error))
+      .then(dispatch(doneWithRequest()));
+  });
+  setTimeout(dispatch(refreshUser()), 400);
 };
 
 // This is called once we've added the car. As you can see in addCar(),
