@@ -1,11 +1,20 @@
 import { useEffect, useState } from 'react';
 import VotesSelectionForm from './VotesSelectionForm.js'
+import VotesCastingForm from './VotesCastingForm.js'
+import VoteCastingSuccess from './VotesCastingSuccess.js';
+
+const VIEW = {
+    SELECTING: "selecting",
+    VOTING: "voting",
+    SUCCESS: "success",
+};
 
 function CaptureVotes() {
     const SERVER_URL = "http://localhost:3005/Elections";
     let [electionList, setElectionList] = useState([]);
     let [electionSelected, setElectionSelected] = useState();
     let [idValue, setIdValue] = useState("");
+    let [view, setView] = useState(VIEW.SELECTING);
 
 
     function checkHttpStatus(response) {
@@ -37,11 +46,36 @@ function CaptureVotes() {
 
     function handleVoteClicked() {
         console.log(`Vote clicked: election selected ${electionSelected}, ID ${idValue}`);
+        setView(VIEW.VOTING);
 
+    }
+    function handleCastVoteClicked() {
+        setView(VIEW.SUCCESS);
+    }
+
+    function handleBackClicked() {
+        setView(VIEW.SELECTING);
+    }
+
+    function renderFormBody() {
+        switch (view) {
+            case VIEW.SELECTING: 
+                return <VotesSelectionForm electionList={electionList} handleOptionSelected={handleOptionSelected} handleIdInput={handleIdInput} handleVoteClicked={handleVoteClicked} />
+            case VIEW.VOTING:
+                return <VotesCastingForm electionId={electionSelected} userId={idValue} handleCastVoteClicked={handleCastVoteClicked} />
+            case VIEW.SUCCESS:
+                return <VoteCastingSuccess handleBackClicked={handleBackClicked} />
+            default:
+                return <VotesSelectionForm electionList={electionList} handleOptionSelected={handleOptionSelected} handleIdInput={handleIdInput} handleVoteClicked={handleVoteClicked} />
+        }
     }
 
     return (
-        <VotesSelectionForm electionList={electionList} handleOptionSelected={handleOptionSelected} handleIdInput={handleIdInput} handleVoteClicked={handleVoteClicked} />
+        <div>
+        {
+            renderFormBody()
+        }
+        </div>
     )
 }
 
