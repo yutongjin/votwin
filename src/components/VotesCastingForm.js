@@ -1,35 +1,18 @@
-import { check } from 'prettier';
 import { useEffect, useState } from 'react';
-import VotesCastingTable from './VotesCastingTable';
+import { useDispatch, useSelector } from "react-redux";
 
-const emptyElection = {
-    "id": 0,
-    "electionTitle": "Loading",
-    "questions": []
-}
+import { refreshQuestionsTable, updateElection } from '../actions/votesActions.js'
 
-function VotesCastingForm({ electionId, userId, handleCastVoteClicked }) {
-    const SERVER_URL = "http://localhost:3005/Elections";
-    let [election, setElection] = useState(emptyElection);
+
+function VotesCastingForm({ electionId, handleCastVoteClicked }) {
+    const dispatch = useDispatch();
+    const election = useSelector((state) => state.election);
+
     let [checkedList, setCheckedList] = useState([]);
 
     useEffect(() => {
-        fetch(`${SERVER_URL}/${electionId}`)
-            .then(checkHttpStatus)
-            .then((res) => res.json())
-            .then((data) => setElection(data))
-            .catch((error) => console.error(error));
+        dispatch(refreshQuestionsTable(electionId));
     }, []);
-
-    function checkHttpStatus(response) {
-        if (response.ok) {
-            return Promise.resolve(response);
-        } else {
-            const error = new Error(response.statusText);
-            error.response = response;
-            return Promise.reject(error);
-        }
-    }
 
     function handleCheckbox(event) {
         let newCheckedList = [...checkedList]
@@ -41,7 +24,7 @@ function VotesCastingForm({ electionId, userId, handleCastVoteClicked }) {
         setCheckedList(newCheckedList);
     }
 
-    function handleClick(event) {
+    function handleClick() {
         let newQuestions = [];
         election.questions.map((question) => {
             let newQuestion = {...question}
@@ -54,16 +37,7 @@ function VotesCastingForm({ electionId, userId, handleCastVoteClicked }) {
         });
 
         let newElection = {...election, questions:[...newQuestions]};
-
-        const requestOptions = {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(newElection),
-        };
-        fetch(`${SERVER_URL}/${newElection.id}`, requestOptions)
-        .then(checkHttpStatus)
-        .then(handleCastVoteClicked)
-        .catch((error) => console.error(error))
+        dispatch(updateElection(newElection, handleCastVoteClicked));
     }
 
     return (

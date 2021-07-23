@@ -1,4 +1,8 @@
 import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+
+import { refreshVotesTable } from '../actions/votesActions.js'
+
 import VotesSelectionForm from './VotesSelectionForm.js'
 import VotesCastingForm from './VotesCastingForm.js'
 import VoteCastingSuccess from './VotesCastingSuccess.js';
@@ -10,31 +14,16 @@ const VIEW = {
 };
 
 function CaptureVotes() {
-    const SERVER_URL = "http://localhost:3005/Elections";
-    let [electionList, setElectionList] = useState([]);
+    const dispatch = useDispatch();
+    const electionList = useSelector((state) => state.electionList);
+
     let [electionSelected, setElectionSelected] = useState();
     let [idValue, setIdValue] = useState("");
     let [view, setView] = useState(VIEW.SELECTING);
 
-
-    function checkHttpStatus(response) {
-        if (response.ok) {
-            return Promise.resolve(response);
-        } else {
-            const error = new Error(response.statusText);
-            error.response = response;
-            return Promise.reject(error);
-        }
-    }
-
     useEffect(() => {
-        fetch(`${SERVER_URL}`)
-            .then(checkHttpStatus)
-            .then((res) => res.json())
-            .then((data) => setElectionList(data))
-            .catch((error) => console.error(error));
+        dispatch(refreshVotesTable());
     }, []);
-
 
     function handleOptionSelected(event) {
         setElectionSelected(event.target.value);
