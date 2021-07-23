@@ -6,7 +6,7 @@ function ResultTable({ electionList }) {
     const [showResults, setShowResults] = useState(-1);
     const onClickShow = (id) => {
         console.log(id);
-        if (id == showResults) {
+        if (id === showResults) {
             setShowResults(-1);
         } else {
             setShowResults(id); 
@@ -19,7 +19,7 @@ function ResultTable({ electionList }) {
                 electionList.map((election) =>
                     <div key={election.id}><label>{election.electionTitle}
                         <button type="button" onClick={() => {onClickShow(election.id)}}> See Results </button>
-                        { election.id == showResults && <ResultInfo questions={election.questions}/> }
+                        { election.id === showResults && <ResultInfo questions={election.questions}/> }
                     </label>
                     </div>
                 )
