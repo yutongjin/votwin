@@ -1,36 +1,19 @@
-import { check } from 'prettier';
 import { useEffect, useState } from 'react';
-import VotesCastingTable from './VotesCastingTable';
+import { useDispatch, useSelector } from "react-redux";
+
+import { refreshQuestionsTable, updateElection } from '../actions/votesActions.js'
 import Button from "@material-ui/core/Button";
 
-const emptyElection = {
-    "id": 0,
-    "electionTitle": "Loading",
-    "questions": []
-}
 
-function VotesCastingForm({ electionId, userId, handleCastVoteClicked }) {
-    const SERVER_URL = "http://localhost:3005/Elections";
-    let [election, setElection] = useState(emptyElection);
+function VotesCastingForm({ electionId, user, handleCastVoteClicked }) {
+    const dispatch = useDispatch();
+    const election = useSelector((state) => state.election);
+
     let [checkedList, setCheckedList] = useState([]);
 
     useEffect(() => {
-        fetch(`${SERVER_URL}/${electionId}`)
-            .then(checkHttpStatus)
-            .then((res) => res.json())
-            .then((data) => setElection(data))
-            .catch((error) => console.error(error));
+        dispatch(refreshQuestionsTable(electionId));
     }, []);
-
-    function checkHttpStatus(response) {
-        if (response.ok) {
-            return Promise.resolve(response);
-        } else {
-            const error = new Error(response.statusText);
-            error.response = response;
-            return Promise.reject(error);
-        }
-    }
 
     function handleCheckbox(event) {
         let newCheckedList = [...checkedList]
@@ -42,29 +25,20 @@ function VotesCastingForm({ electionId, userId, handleCastVoteClicked }) {
         setCheckedList(newCheckedList);
     }
 
-    function handleClick(event) {
+    function handleClick() {
         let newQuestions = [];
         election.questions.map((question) => {
-            let newQuestion = {...question}
+            let newQuestion = { ...question }
 
             checkedList.includes(question.id)
-            ? newQuestion.totalYes += 1
-            : newQuestion.totalNo += 1
+                ? newQuestion.totalYes += 1
+                : newQuestion.totalNo += 1
 
             newQuestions.push(newQuestion);
         });
 
-        let newElection = {...election, questions:[...newQuestions]};
-
-        const requestOptions = {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(newElection),
-        };
-        fetch(`${SERVER_URL}/${newElection.id}`, requestOptions)
-        .then(checkHttpStatus)
-        .then(handleCastVoteClicked)
-        .catch((error) => console.error(error))
+        let newElection = { ...election, questions: [...newQuestions] };
+        dispatch(updateElection(newElection, user, handleCastVoteClicked));
     }
 
     return (
@@ -73,21 +47,21 @@ function VotesCastingForm({ electionId, userId, handleCastVoteClicked }) {
             {
                 election.questions.map((question) => {
                     return (
-                        <div>
-                            <input type="checkbox" id={question.id} name={question.id} onChange={handleCheckbox} /> &nbsp; 
-                            <label for={question.id}>{question.questionTitle}</label>
+                        <div key={question.id}>
+                            <input type="checkbox" id={question.id} name={question.id} onChange={handleCheckbox} /> &nbsp;
+                            <label>{question.questionTitle}</label>
                         </div>
                     )
                 })
             }
             <p>
-            <Button
-          variant="contained"
-          color="blue"
-          component="span"
-          onClick={handleClick}
-        >
-          Cast Vote
+                <Button
+                    variant="contained"
+                    color="blue"
+                    component="span"
+                    onClick={handleClick}
+                >
+                    Cast Vote
         </Button>
             </p>
         </form>

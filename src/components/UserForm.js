@@ -13,7 +13,7 @@ function UserForm({ onAddHandler }) {
     email: "",
     phone: "",
     checked: false,
-    voted: false,
+    voted: [],
   };
   let [userForm, setUserForm] = useState(emptyUserForm);
 

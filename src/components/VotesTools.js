@@ -1,7 +1,12 @@
-import { useEffect, useState } from "react";
-import VotesSelectionForm from "./VotesSelectionForm.js";
-import VotesCastingForm from "./VotesCastingForm.js";
-import VoteCastingSuccess from "./VotesCastingSuccess.js";
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+
+import { refreshUser } from "../actions/userActions";
+import { refreshVotesTable } from '../actions/votesActions.js'
+
+import VotesSelectionForm from './VotesSelectionForm.js'
+import VotesCastingForm from './VotesCastingForm.js'
+import VoteCastingSuccess from './VotesCastingSuccess.js';
 
 const VIEW = {
   SELECTING: "selecting",
@@ -10,46 +15,49 @@ const VIEW = {
 };
 
 function CaptureVotes() {
-  const SERVER_URL = "http://localhost:3005/Elections";
-  let [electionList, setElectionList] = useState([]);
-  let [electionSelected, setElectionSelected] = useState();
+  const dispatch = useDispatch();
+  const usersList = useSelector((state) => state.users);
+  const electionList = useSelector((state) => state.electionList);
+
+  let [electionSelected, setElectionSelected] = useState(-1);
   let [idValue, setIdValue] = useState("");
   let [view, setView] = useState(VIEW.SELECTING);
 
-  function checkHttpStatus(response) {
-    if (response.ok) {
-      return Promise.resolve(response);
-    } else {
-      const error = new Error(response.statusText);
-      error.response = response;
-      return Promise.reject(error);
-    }
-  }
-
   useEffect(() => {
-    fetch(`${SERVER_URL}`)
-      .then(checkHttpStatus)
-      .then((res) => res.json())
-      .then((data) => setElectionList(data))
-      .catch((error) => console.error(error));
+    dispatch(refreshUser());
+    dispatch(refreshVotesTable());
   }, []);
 
   function handleOptionSelected(event) {
     setElectionSelected(event.target.value);
   }
 
-  function handleIdInput(event) {
-    setIdValue(event.target.value);
+  function handleVoteClicked() {
+    if (electionSelected === -1) {
+      alert("Please selecte an Election");
+      return;
+    }
+
+    if ((usersList.map((user) => `${user.id}`)).includes(idValue) === false) {
+      alert("Invalid User ID");
+      return;
+    }
+
+    const selectedUser = usersList.find((u) => { if (`${u.id}` === idValue) return u; });
+    if (selectedUser.voted.includes(parseInt(electionSelected))) {
+      alert(`User ${selectedUser.id} has already voted in Election #${electionSelected}`);
+      return;
+    }
+
+    setView(VIEW.VOTING)
   }
 
-  function handleVoteClicked() {
-    console.log(
-      `Vote clicked: election selected ${electionSelected}, ID ${idValue}`
-    );
-    setView(VIEW.VOTING);
-  }
   function handleCastVoteClicked() {
     setView(VIEW.SUCCESS);
+  }
+
+  function handleIdInput(event) {
+    setIdValue(event.target.value);
   }
 
   function handleBackClicked() {
@@ -59,37 +67,23 @@ function CaptureVotes() {
   function renderFormBody() {
     switch (view) {
       case VIEW.SELECTING:
-        return (
-          <VotesSelectionForm
-            electionList={electionList}
-            handleOptionSelected={handleOptionSelected}
-            handleIdInput={handleIdInput}
-            handleVoteClicked={handleVoteClicked}
-          />
-        );
+        return <VotesSelectionForm electionList={electionList} handleOptionSelected={handleOptionSelected} handleIdInput={handleIdInput} handleVoteClicked={handleVoteClicked} />
       case VIEW.VOTING:
-        return (
-          <VotesCastingForm
-            electionId={electionSelected}
-            userId={idValue}
-            handleCastVoteClicked={handleCastVoteClicked}
-          />
-        );
+        return <VotesCastingForm electionId={electionSelected} user={usersList.find((u) => { if (`${u.id}` === idValue) return u; })} handleCastVoteClicked={handleCastVoteClicked} />
       case VIEW.SUCCESS:
-        return <VoteCastingSuccess handleBackClicked={handleBackClicked} />;
+        return <VoteCastingSuccess handleBackClicked={handleBackClicked} />
       default:
-        return (
-          <VotesSelectionForm
-            electionList={electionList}
-            handleOptionSelected={handleOptionSelected}
-            handleIdInput={handleIdInput}
-            handleVoteClicked={handleVoteClicked}
-          />
-        );
+        return <VotesSelectionForm electionList={electionList} handleOptionSelected={handleOptionSelected} handleIdInput={handleIdInput} handleVoteClicked={handleVoteClicked} />
     }
   }
 
-  return <div>{renderFormBody()}</div>;
+  return (
+    <div>
+      {
+        renderFormBody()
+      }
+    </div>
+  )
 }
 
 export default CaptureVotes;
