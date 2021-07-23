@@ -1,4 +1,6 @@
 import { useState } from "react";
+import "../App.css";
+import Button from '@material-ui/core/Button';
 
 function UserForm({ onAddHandler }) {
   const [isRegistered, setIsRegistered] = useState(false);
@@ -32,7 +34,7 @@ function UserForm({ onAddHandler }) {
   }
 
   return !isRegistered ? (
-    <form>
+    <form className="form-box">
       <p>Enter your firstName:</p>
       <input
         type="text"
@@ -40,7 +42,6 @@ function UserForm({ onAddHandler }) {
         value={userForm.firstName}
         onChange={onChange}
       />{" "}
-      &nbsp;
       <p>Enter your lastName:</p>
       <input
         type="text"
@@ -48,7 +49,6 @@ function UserForm({ onAddHandler }) {
         value={userForm.lastName}
         onChange={onChange}
       />{" "}
-      &nbsp;
       <p>Enter your address:</p>
       <input
         type="text"
@@ -56,7 +56,6 @@ function UserForm({ onAddHandler }) {
         value={userForm.address}
         onChange={onChange}
       />{" "}
-      &nbsp;
       <p>Enter your city:</p>
       <input
         type="text"
@@ -64,7 +63,6 @@ function UserForm({ onAddHandler }) {
         value={userForm.city}
         onChange={onChange}
       />{" "}
-      &nbsp;
       <p>Enter your birthday:</p>
       <input
         type="text"
@@ -72,7 +70,6 @@ function UserForm({ onAddHandler }) {
         value={userForm.birthday}
         onChange={onChange}
       />{" "}
-      &nbsp;
       <p>Enter your email:</p>
       <input
         type="text"
@@ -80,7 +77,6 @@ function UserForm({ onAddHandler }) {
         value={userForm.email}
         onChange={onChange}
       />{" "}
-      &nbsp;
       <p>Enter your phone:</p>
       <input
         type="text"
@@ -88,8 +84,7 @@ function UserForm({ onAddHandler }) {
         value={userForm.phone}
         onChange={onChange}
       />{" "}
-      &nbsp;
-      <input type="button" value="register" onClick={onFormSubmit} />
+      <Button variant="contained" color= "blue" component="span"  onClick={onFormSubmit} >Register</Button>
     </form>
   ) : (
     <div></div>

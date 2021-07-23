@@ -71,7 +71,7 @@ function CaptureVotes() {
     }
 
     return (
-        <div>
+        <div className="center">
         {
             renderFormBody()
         }

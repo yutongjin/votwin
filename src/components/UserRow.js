@@ -1,3 +1,5 @@
+import './styles.css';
+
 let UserRow = ({ user, onEditHandler, onDeleteHandler, onCheckedHandler }) => {
   return (
     <tr key={user.id}>

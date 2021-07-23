@@ -1,25 +1,64 @@
 nav {
-    background-color: #b9dae2;
-  }
-  
-  nav ul {
-    margin: 0;
-  }
-  
-  nav li {
-    display: inline;
-    list-style-type: none;
-  }
-  
-  nav a:hover {
-    background-color: #ddebee;
-    color: #008cae;
-  }
-  
-  nav a {
-    display: inline-block;
-    text-decoration: none;
-    color: #6e6f6f;
-    padding: 1.2em;
-    display: inline-block;
-  }
+  background-color: #b9dae2;
+  display: block;
+  margin-left: 10em;
+  margin-right: 10em;
+  margin-bottom: 5em;
+  max-width: 10%;
+  height: auto;
+  flex-direction: row;
+}
+
+nav ul {
+  margin: 0;
+  flex-direction: row;
+}
+
+nav li {
+  display: inline;
+  list-style-type: none;
+}
+
+nav a:hover {
+  background-color: #ddebee;
+  color: #008cae;
+}
+
+nav a {
+  display: inline-block;
+  text-decoration: none;
+  color: #6e6f6f;
+  padding: 1.2em;
+}
+
+.container {
+  justify-content: center;
+  align-items: center;
+  height: 1700px;
+  border: 28px solid goldenrod;
+  border-radius: 50%;
+}
+
+.form-box {
+  min-width: 40%;
+  height: 90vh;
+  border: dotted #f0a57a 5vw;
+  /* border: 1px solid red; */
+  margin: 0vw;
+  padding-top: 7vw;
+  padding-left: 39vw;
+  background-color: beige;
+
+  /* position:relative for .prevBtn and .nextBtn position:absolute; */
+  position: relative;
+}
+
+.router {
+  flex-direction: row;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 5em;
+  max-width: 10%;
+  height: auto;
+}

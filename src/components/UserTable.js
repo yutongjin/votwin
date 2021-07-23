@@ -1,9 +1,9 @@
 import { useState, useMemo } from "react";
 import "./styles.css";
+import Button from '@material-ui/core/Button';
 
 import UserRow from "./UserRow.js";
 import UserEditRow from "./UserEditRow.js";
-
 function UserTable({
   userList,
   onSaveHandler: onSave,
@@ -39,79 +39,87 @@ function UserTable({
 
   return (
     <div>
-      <button onClick={() => setIsExpanded(!isExpanded)}>UserList</button>
-      {isExpanded ? (
-        <table>
+      {/* <Button variant="contained" color="blue" component="span" onClick={() => setIsExpanded(!isExpanded)}>UserList</Button> */}
+      
+        <table >
           <thead>
             <tr key="header">
-              <th>id</th>
               <th>
-                <button
+                <Button variant="contained" color="blue" 
+                  type="button"
+                  onClick={() => requestSort("id")}
+                  className={getClassNamesFor("id")}
+                >
+                  id
+                </Button>
+              </th>
+              <th>
+                <Button variant="contained" color="blue" 
                   type="button"
                   onClick={() => requestSort("firstName")}
                   className={getClassNamesFor("firstName")}
                 >
                   firstName
-                </button>
+                </Button>
               </th>
               <th>
-                <button
+                <Button variant="contained" color="blue" 
                   type="button"
                   onClick={() => requestSort("lastName")}
                   className={getClassNamesFor("lastName")}
                 >
                   lastName
-                </button>
+                </Button>
               </th>
               <th>
-                <button
+                <Button variant="contained" color="blue" 
                   type="button"
                   onClick={() => requestSort("address")}
                   className={getClassNamesFor("address")}
                 >
                   address
-                </button>
+                </Button>
               </th>
               <th>
-                <button
+                <Button variant="contained" color="blue" 
                   type="button"
                   onClick={() => requestSort("city")}
                   className={getClassNamesFor("city")}
                 >
                   city
-                </button>
+                </Button>
               </th>
               <th>
-                <button
+                <Button variant="contained" color="blue" 
                   type="button"
                   onClick={() => requestSort("birthday")}
                   className={getClassNamesFor("birthday")}
                 >
-                  firstName
-                </button>
+                  birthday
+                </Button>
               </th>
               <th>
-                <button
+                <Button variant="contained" color="blue" 
                   type="button"
                   onClick={() => requestSort("email")}
                   className={getClassNamesFor("email")}
                 >
                   email
-                </button>
+                </Button>
               </th>
               <th>
-                <button
+                <Button variant="contained" color="blue" 
                   type="button"
                   onClick={() => requestSort("phone")}
                   className={getClassNamesFor("phone")}
                 >
                   phone
-                </button>
+                </Button>
               </th>
             </tr>
           </thead>
           <tbody>
-            <div>
+            
               {items.map((user) => {
                 return editId != user.id ? (
                   <UserRow
@@ -128,13 +136,15 @@ function UserTable({
                   />
                 );
               })}
-              <button onClick={onTriggerDeleteSelected}>
-                delete selected users
-              </button>
-            </div>
+         
+           
           </tbody>
         </table>
-      ) : null}
+        <div className="center">
+        <Button variant="contained" color="blue"  onClick={onTriggerDeleteSelected}>
+                delete selected users
+        </Button>
+        </div>
     </div>
   );
 }
