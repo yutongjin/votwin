@@ -7,6 +7,7 @@ import logo from "./res/votwin_logo.png";
 function App() {
   return (
     <div className="container">
+      <h1  className="header">Votwin</h1>
       <img className="center" src={logo} alt="new" />
       <Router>
         <nav className="router">

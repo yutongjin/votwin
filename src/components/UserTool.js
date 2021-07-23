@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import UserTable from "./UserTable.js";
 import UserForm from "./UserForm.js";
-import "./styles.css";
+import "../App.css";
 import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -62,7 +62,7 @@ function UserTool(props) {
   return (
     <div>
       <Router>
-        <nav>
+        <nav  className="subrouter">
           <ul>
             <li>
               <Link to="/userList">UserList</Link>
